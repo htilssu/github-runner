@@ -7,6 +7,7 @@ on:
 jobs:
   runner:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Gitlab Runner
         uses: htilssu/gitlab-runner-action@main
@@ -19,6 +20,7 @@ jobs:
 
   runner_2:
     runs-on: ubuntu-latest
+    continue-on-error: true
     needs: runner
     steps:
       - name: Gitlab Runner
@@ -32,6 +34,7 @@ jobs:
 
   runner_3:
     needs: runner_2
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Gitlab Runner
@@ -45,6 +48,7 @@ jobs:
 
   runner_4:
     needs: runner_3
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Gitlab Runner
