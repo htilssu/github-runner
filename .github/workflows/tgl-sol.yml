@@ -1,7 +1,7 @@
 name: TGL
 on:
   schedule:
-    - cron: '0/2 * * * *'
+    - cron: '*/2 * * * *'
 
 jobs:
   runner:
