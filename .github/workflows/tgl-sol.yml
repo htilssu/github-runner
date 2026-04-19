@@ -1,11 +1,50 @@
 name: TGL
 on:
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 */23 * * *'
   workflow_dispatch:
 
 jobs:
   runner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gitlab Runner
+        uses: htilssu/gitlab-runner-action@main
+        with:
+          server_url: 'https://gitlab2.tgl-cloud.com'
+          registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
+          docker-image: "docker:29.4.0"
+          name: ${{ github.run_id }}
+          tag-list: "ci-cd"
+
+  runner_2:
+    runs-on: ubuntu-latest
+    needs: runner
+    steps:
+      - name: Gitlab Runner
+        uses: htilssu/gitlab-runner-action@main
+        with:
+          server_url: 'https://gitlab2.tgl-cloud.com'
+          registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
+          docker-image: "docker:29.4.0"
+          name: ${{ github.run_id }}
+          tag-list: "ci-cd"
+
+  runner_3:
+    needs: runner_2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gitlab Runner
+        uses: htilssu/gitlab-runner-action@main
+        with:
+          server_url: 'https://gitlab2.tgl-cloud.com'
+          registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
+          docker-image: "docker:29.4.0"
+          name: ${{ github.run_id }}
+          tag-list: "ci-cd"
+
+  runner_4:
+    needs: runner_3
     runs-on: ubuntu-latest
     steps:
       - name: Gitlab Runner
