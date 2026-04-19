@@ -22,6 +22,6 @@ jobs:
         with:
           server_url: 'https://gitlab2.tgl-cloud.com'
           registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
-          docker-image: "docker:20.10.16-dind"
+          docker-image: "docker:29.4.0"
           name: ${{ github.run_id }}
           tag-list: "ci-cd"
