@@ -1,0 +1,25 @@
+name: TGL
+on:
+  schedule:
+    - cron: '0/2 * * * *'
+
+jobs:
+  runner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize Build Space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+
+      - name: Gitlab Runner
+        uses: edersonbrilhante/gitlab-runner-action@main
+        with:
+          registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
+          docker-image: "docker:20.10.16-dind"
+          name: ${{ github.run_id }}
+          tag-list: "ci-cd"
