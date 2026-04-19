@@ -18,7 +18,7 @@ jobs:
 #          remove-haskell: 'true'
 
       - name: Gitlab Runner
-        uses: edersonbrilhante/gitlab-runner-action@main
+        uses: uses: htilssu/gitlab-runner-action@main
         with:
           registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
           docker-image: "docker:20.10.16-dind"
