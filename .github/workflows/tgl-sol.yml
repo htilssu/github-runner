@@ -8,14 +8,15 @@ jobs:
   runner:
     runs-on: ubuntu-latest
     steps:
-#      - name: Maximize Build Space
-#        uses: easimon/maximize-build-space@master
-#        with:
-#          root-reserve-mb: 512
-#          swap-size-mb: 1024
-#          remove-dotnet: 'true'
-#          remove-android: 'true'
-#          remove-haskell: 'true'
+      - name: Maximize Build Space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 100000
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+
 
       - name: Gitlab Runner
         uses: htilssu/gitlab-runner-action@main
