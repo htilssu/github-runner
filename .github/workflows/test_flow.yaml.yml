@@ -1,0 +1,17 @@
+name: test_flow.yaml
+on:
+  workflow_dispatch:
+
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Restart workflow
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          workflow: test_flow.yaml.yml
+          ref: ${{ github.ref }}

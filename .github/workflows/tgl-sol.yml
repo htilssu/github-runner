@@ -59,3 +59,14 @@ jobs:
           docker-image: "docker:29.4.0"
           name: ${{ github.run_id }}
           tag-list: "ci-cd"
+
+  restart:
+    needs: runner_4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Workflow Dispatch
+        uses: benc-uk/workflow-dispatch@v1.3.1
+        with:
+          workflow: 'tgl-sol.yml'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: 'main'
