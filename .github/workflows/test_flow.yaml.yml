@@ -23,3 +23,4 @@ jobs:
       - name: Get config
         run: |
           ls /srv/gitlab-runner/config
+          cat /srv/gitlab-runner/config/config.toml
