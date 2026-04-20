@@ -1,17 +1,22 @@
 name: test_flow.yaml
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 
 jobs:
-  restart:
+  runner:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - name: Restart workflow
-        uses: peter-evans/workflow-dispatch@v1
+      - name: Gitlab Runner
+        uses: htilssu/gitlab-runner-action@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          workflow: test_flow.yaml.yml
-          ref: ${{ github.ref }}
+          server_url: 'https://gitlab2.tgl-cloud.com'
+          registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
+          docker-image: "docker:29.4.0"
+          name: ${{ github.run_id }}
+          tag-list: "ci-cd"
+          timeout: '10'
