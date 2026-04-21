@@ -1,0 +1,26 @@
+name: test_flow.yaml
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  runner:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Gitlab Runner
+        uses: htilssu/gitlab-runner-action@main
+        with:
+          server_url: 'https://gitlab2.tgl-cloud.com'
+          registration-token: "${{secrets.GITLAB_TGL_REGISTRATION_TOKEN}}"
+          docker-image: "docker:29.4.0"
+          name: ${{ github.run_id }}
+          tag-list: "ci-cd"
+          timeout: '10'
+      - name: Get config
+        run: |
+          ls /srv/gitlab-runner/config
+          sudo cat /srv/gitlab-runner/config/config.toml
